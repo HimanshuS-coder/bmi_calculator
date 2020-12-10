@@ -4,9 +4,9 @@ import 'reusable_card.dart';
 import 'reusable_gender.dart';
 
 const Color activecardcolor = Color(0xFF686d76);
-const Color inactivecardcolor= Color(0xFF393e46);
+const Color inactivecardcolor = Color(0xFF393e46);
 
-enum Gendertype {male,female}
+enum Gendertype { male, female }
 
 class InputPage extends StatefulWidget {
   @override
@@ -30,8 +30,6 @@ class _InputPageState extends State<InputPage> {
   //   // }
   // }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,36 +46,34 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: (){
+                  child: ReusableCard(
+                    onpress: () {
                       setState(() {
-                        // updateColor(n: gendertype.male);
-                        genderSelected=Gendertype.male; 
+                        genderSelected = Gendertype.male;
                       });
                     },
-                    child: ReusableCard(
-                      colour: genderSelected==Gendertype.male ? activecardcolor : inactivecardcolor,
-                      cardchild: ReusableGender(
-                        ic: FontAwesomeIcons.mars,
-                        gender: 'MALE',
-                      ),
+                    colour: genderSelected == Gendertype.male
+                        ? activecardcolor
+                        : inactivecardcolor,
+                    cardchild: ReusableGender(
+                      ic: FontAwesomeIcons.mars,
+                      gender: 'MALE',
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: (){
+                  child: ReusableCard(
+                    onpress: (){
                       setState(() {
-                        // updateColor(n: gendertype.female);
                         genderSelected=Gendertype.female;
                       });
                     },
-                    child: ReusableCard(
-                      colour: genderSelected==Gendertype.female ? activecardcolor : inactivecardcolor,
-                      cardchild: ReusableGender(
-                        ic: FontAwesomeIcons.venus,
-                        gender: 'FEMALE',
-                      ),
+                    colour: genderSelected == Gendertype.female
+                        ? activecardcolor
+                        : inactivecardcolor,
+                    cardchild: ReusableGender(
+                      ic: FontAwesomeIcons.venus,
+                      gender: 'FEMALE',
                     ),
                   ),
                 ),
@@ -118,5 +114,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
-
