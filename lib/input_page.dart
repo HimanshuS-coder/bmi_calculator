@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'reusable_gender.dart';
+import 'constants.dart';
 
 const Color activecardcolor = Color(0xFF686d76);
 const Color inactivecardcolor = Color(0xFF393e46);
@@ -18,6 +21,8 @@ class _InputPageState extends State<InputPage> {
   // Color femaleColor = inactivecardcolor;
 
   Gendertype genderSelected;
+  double currentValue = 180;
+  int weight = 60, age = 15;
 
   // void updateColor({gendertype n}){
 
@@ -32,6 +37,8 @@ class _InputPageState extends State<InputPage> {
 
   @override
   Widget build(BuildContext context) {
+    int curvalue = currentValue.toInt();
+
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -41,6 +48,7 @@ class _InputPageState extends State<InputPage> {
         ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
@@ -63,9 +71,9 @@ class _InputPageState extends State<InputPage> {
                 ),
                 Expanded(
                   child: ReusableCard(
-                    onpress: (){
+                    onpress: () {
                       setState(() {
-                        genderSelected=Gendertype.female;
+                        genderSelected = Gendertype.female;
                       });
                     },
                     colour: genderSelected == Gendertype.female
@@ -82,6 +90,49 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: ReusableCard(
+              cardchild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'HEIGHT',
+                    style: TextStyle(fontSize: 20, color: Colors.grey.shade300),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    children: [
+                      Text(
+                        '$curvalue',
+                        style: kstyle,
+                      ),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        'cm',
+                        style: TextStyle(
+                            fontSize: 15, color: Colors.grey.shade300),
+                      )
+                    ],
+                  ),
+                  Slider(
+                      value: currentValue,
+                      min: 10,
+                      max: 250,
+                      divisions: 240,
+                      activeColor: inactivecardcolor,
+                      inactiveColor: Color(0xFF373a40),
+                      label: currentValue.round().toString(),
+                      onChanged: (double value) {
+                        setState(() {
+                          currentValue = value;
+                        });
+                      }),
+                ],
+              ),
               colour: activecardcolor,
             ),
           ),
@@ -90,6 +141,77 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
+                    cardchild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WEIGHT',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.grey.shade300,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: [
+                            Text(
+                              '$weight',
+                              style: kstyle,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 5),
+                              child: Text(
+                                'kg',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.grey.shade300,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            GestureDetector(
+                                onLongPress :(){
+                                  setState(() {
+                                    weight+=10;
+                                  });
+                                },
+                                child: FloatingActionButton(
+                                onPressed: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                                backgroundColor: inactivecardcolor,
+                                child: Icon(Icons.add),
+                              ),
+                            ),
+                            GestureDetector(
+                                
+                                onLongPress: (){
+                                  setState(() {
+                                    weight=weight-10;
+                                  });
+                                },
+                                child: FloatingActionButton(
+                                backgroundColor: inactivecardcolor,
+                                onPressed: () {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                },
+                                child: Icon(Icons.remove),
+                                
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                     colour: activecardcolor,
                   ),
                 ),
