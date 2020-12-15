@@ -4,20 +4,21 @@ import 'constants.dart';
 
 class ReusableBottomCard extends StatefulWidget {
   final int input;
-  final String type,weightType;
+  final String type,weightType,tagname1,tagname2;
 
-  ReusableBottomCard({@required this.input,@required this.type,@required this.weightType});
+
+  ReusableBottomCard({@required this.input,@required this.type,@required this.weightType,@required this.tagname1,@required this.tagname2});
 
   @override
   _ReusableBottomCardState createState() =>
-      _ReusableBottomCardState(input,type,weightType);
+      _ReusableBottomCardState(input,type,weightType,tagname1,tagname2);
 }
 
 class _ReusableBottomCardState extends State<ReusableBottomCard> {
   int input;
-  String type,weightType;
+  String type,weightType,tagname1,tagname2;
 
-  _ReusableBottomCardState(this.input,this.type,this.weightType);
+  _ReusableBottomCardState(this.input,this.type,this.weightType,this.tagname1,this.tagname2);
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +63,7 @@ class _ReusableBottomCardState extends State<ReusableBottomCard> {
                   });
                 },
                 child: FloatingActionButton(
+                  heroTag: tagname1,
                   onPressed: () {
                     setState(() {
                       input++;
@@ -78,6 +80,7 @@ class _ReusableBottomCardState extends State<ReusableBottomCard> {
                   });
                 },
                 child: FloatingActionButton(
+                  heroTag: tagname2,
                   backgroundColor: inactivecardcolor,
                   onPressed: () {
                     setState(() {
@@ -86,7 +89,7 @@ class _ReusableBottomCardState extends State<ReusableBottomCard> {
                   },
                   child: Icon(Icons.remove),
                 ),
-              )
+              ),
             ],
           )
         ],
