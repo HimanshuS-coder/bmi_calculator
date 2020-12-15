@@ -27,6 +27,16 @@ class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Padding(
+            padding: EdgeInsets.only(right: 55),
+              child: Text(
+            'BMI Calculator',
+            textAlign: TextAlign.center,
+          )),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,7 +90,6 @@ class _ResultPageState extends State<ResultPage> {
             FlatButton(
               padding: EdgeInsets.all(0),
               textColor: Colors.white,
-              
               onPressed: () {
                 setState(() {
                   Navigator.pop(context);
