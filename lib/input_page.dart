@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'reusable_gender.dart';
 import 'constants.dart';
-import 'reusable_bottom_card.dart';
 import 'result_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -360,7 +359,7 @@ class _InputPageState extends State<InputPage> {
               setState(
                 () {
                   if (genderSelected == null) {
-                    Fluttertoast.showToast(msg: 'Please Select a Gender Type');
+                    Fluttertoast.showToast(msg: 'Please Select a Gender Type',gravity: ToastGravity.CENTER,fontSize: 22);
                   } else {
                     calculateBmi();
                     fetchBMI();
